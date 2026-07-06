@@ -1013,6 +1013,23 @@ popupWrap.addEventListener("mouseup", (e) => {
     if(dx < 0) showNextImage(); else showPrevImage();
   }
 });
+ const slides = document.querySelectorAll(".autoGallery .slide");
+let slideIndex = 0;
+
+function autoSlide(){
+
+    slides.forEach(img=>img.classList.remove("active"));
+
+    slideIndex++;
+
+    if(slideIndex >= slides.length){
+        slideIndex = 0;
+    }
+
+    slides[slideIndex].classList.add("active");
+}
+
+setInterval(autoSlide,5000);
  
 </script>
 </body>
