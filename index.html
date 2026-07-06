@@ -265,6 +265,80 @@ body{
   padding-top:6px;
 }
 
+/* ---- PLAYLIST PAGE ---- */
+
+#playlistPage{ height:100%; }
+
+.playlistLabel{
+  background:#e4ead6;
+  border-radius:8px;
+  padding:8px 12px;
+  font-size:19px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:8px;
+  color:#33402c;
+}
+
+.trackList{
+  flex:1;
+  overflow-y:auto;
+  padding-right:4px;
+}
+
+.trackList::-webkit-scrollbar{ width:5px; }
+.trackList::-webkit-scrollbar-thumb{ background:#7d8a70; border-radius:3px; }
+
+.track{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  padding:8px 10px;
+  border-radius:8px;
+  font-size:19px;
+  color:#2c3620;
+  cursor:pointer;
+}
+
+.track .num{
+  width:18px;
+  opacity:.7;
+  flex-shrink:0;
+}
+
+.track .name{
+  flex:1;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+
+.track.playing{
+  background:#4c5b45;
+  color:#fff;
+}
+.track.playing .num{ opacity:1; }
+
+.emptyTracks{
+  text-align:center;
+  color:#5a6650;
+  font-size:18px;
+  margin-top:30px;
+  line-height:24px;
+}
+
+.addTrackBtn{
+  margin-top:6px;
+  text-align:center;
+  background:#4c5b45;
+  color:#e9ecdf;
+  border-radius:8px;
+  padding:8px;
+  font-size:19px;
+  cursor:pointer;
+}
+
 /* ---- FOOTER NAV (message/gallery) ---- */
 
 .screenFooter{
@@ -409,6 +483,7 @@ body{
         <div class="menuList">
           <div class="item active" data-target="message" onclick="showPage('message')">▶ MESSAGE</div>
           <div class="item" data-target="gallery" onclick="showPage('gallery')">GALERI</div>
+          <div class="item" data-target="playlist" onclick="showPage('playlist')">PLAYLIST</div>
         </div>
       </div>
 
@@ -438,7 +513,7 @@ body{
       <div class="page" id="galleryPage">
         <div class="galleryLabel"><span>memories</span><span>♥</span></div>
         <div class="gallery">
-          <img src="1.jpg">
+          <img src="https://picsum.photos/200?1">
           <img src="https://picsum.photos/200?2">
           <img src="https://picsum.photos/200?3">
           <img src="https://picsum.photos/200?4">
@@ -449,6 +524,20 @@ body{
           <img src="https://picsum.photos/200?9">
         </div>
         <div class="pageNav">1 / 3 &nbsp;▶</div>
+        <div class="screenFooter">
+          <span onclick="showPage('home')">◀ BACK</span>
+          <span>♥</span>
+          <span onclick="showPage('home')">HOME ▶</span>
+        </div>
+      </div>
+
+      <!-- PLAYLIST PAGE -->
+      <div class="page" id="playlistPage">
+        <div class="playlistLabel"><span>daftar lagu</span><span>♥</span></div>
+        <div class="trackList" id="trackList">
+          <div class="emptyTracks" id="emptyTracks">belum ada lagu.<br>tekan "+ tambah lagu" di bawah.</div>
+        </div>
+        <div class="addTrackBtn" onclick="document.getElementById('fileInput').click()">+ tambah lagu</div>
         <div class="screenFooter">
           <span onclick="showPage('home')">◀ BACK</span>
           <span>♥</span>
@@ -470,7 +559,7 @@ body{
     <div class="volBtn" id="volBtn">VOL</div>
   </div>
 
-  <input type="file" id="fileInput" accept="audio/*" style="display:none">
+  <input type="file" id="fileInput" accept="audio/*" multiple style="display:none">
 
 </div>
 
@@ -500,21 +589,32 @@ function showPage(page){
     document.querySelector('.item[data-target="gallery"]').classList.add("active");
     statusLeft.textContent = "♪ GALERI";
   }
+  if(page==="playlist"){
+    document.getElementById("playlistPage").classList.add("active");
+    document.querySelector('.item[data-target="playlist"]').classList.add("active");
+    statusLeft.textContent = "♪ PLAYLIST";
+  }
 }
 
-/* ---------- AUDIO PLAYER ---------- */
+/* ---------- AUDIO PLAYER + PLAYLIST ---------- */
 
 const audio = new Audio();
 audio.preload = "metadata";
 
-const playBtn   = document.getElementById("playBtn");
-const prevBtn   = document.getElementById("prevBtn");
-const nextBtn   = document.getElementById("nextBtn");
-const volBtn    = document.getElementById("volBtn");
-const fileInput = document.getElementById("fileInput");
-const statusLeft= document.getElementById("statusLeft");
+const playBtn    = document.getElementById("playBtn");
+const prevBtn    = document.getElementById("prevBtn");
+const nextBtn    = document.getElementById("nextBtn");
+const volBtn     = document.getElementById("volBtn");
+const fileInput  = document.getElementById("fileInput");
+const statusLeft = document.getElementById("statusLeft");
+const trackList  = document.getElementById("trackList");
+const emptyTracks= document.getElementById("emptyTracks");
 
-let hasTrack = false;
+// daftar lagu: tiap item {name, url}
+// kalau kamu sudah punya file lagu tetap, bisa langsung isi array ini, contoh:
+// let playlist = [{ name:"Nama Lagu 1", url:"lagu1.mp3" }, { name:"Nama Lagu 2", url:"lagu2.mp3" }];
+let playlist = [];
+let currentIndex = -1;
 let muted = false;
 
 function formatTime(sec){
@@ -525,52 +625,84 @@ function formatTime(sec){
 }
 
 function updateStatusTime(){
-  // only show elapsed time while on the home page
+  // hanya tampilkan waktu berjalan saat berada di halaman home
   if(document.getElementById("homePage").classList.contains("active")){
     statusLeft.textContent = "♪ " + formatTime(audio.currentTime || 0);
   }
 }
 
-// ganti "lagu.mp3" di bawah ini dengan file lagu kamu sendiri kalau sudah punya,
-// atau biarkan kosong lalu tekan tombol play untuk memilih file dari perangkat
-audio.src = "lagu.mp3";
+function renderPlaylist(){
+  trackList.innerHTML = "";
+  if(playlist.length === 0){
+    trackList.appendChild(emptyTracks);
+    return;
+  }
+  playlist.forEach((track, i) => {
+    const row = document.createElement("div");
+    row.className = "track" + (i === currentIndex ? " playing" : "");
+    row.innerHTML =
+      '<span class="num">' + (i === currentIndex ? "♪" : (i+1)) + '</span>' +
+      '<span class="name">' + track.name + '</span>' +
+      '<span>' + (i === currentIndex && !audio.paused ? "❚❚" : "▶") + '</span>';
+    row.onclick = () => loadTrack(i);
+    trackList.appendChild(row);
+  });
+}
+
+function loadTrack(i, autoplay = true){
+  if(i < 0 || i >= playlist.length) return;
+  currentIndex = i;
+  audio.src = playlist[i].url;
+  if(autoplay) audio.play().catch(()=>{});
+  renderPlaylist();
+}
 
 playBtn.addEventListener("click", () => {
-  if(!hasTrack){
+  if(playlist.length === 0){
     fileInput.click();
     return;
   }
+  if(currentIndex === -1){
+    loadTrack(0);
+    return;
+  }
   if(audio.paused){
-    audio.play().catch(()=>{ fileInput.click(); });
+    audio.play().catch(()=>{});
   } else {
     audio.pause();
   }
 });
 
 fileInput.addEventListener("change", (e) => {
-  const file = e.target.files[0];
-  if(!file) return;
-  const url = URL.createObjectURL(file);
-  audio.src = url;
-  hasTrack = true;
-  audio.play();
+  const files = Array.from(e.target.files);
+  if(files.length === 0) return;
+  const startIndex = playlist.length;
+  files.forEach(file => {
+    const name = file.name.replace(/\.[^/.]+$/, "");
+    playlist.push({ name: name, url: URL.createObjectURL(file) });
+  });
+  renderPlaylist();
+  if(currentIndex === -1) loadTrack(startIndex);
+  fileInput.value = "";
 });
 
-audio.addEventListener("play", () => { playBtn.textContent = "❚❚"; });
-audio.addEventListener("pause", () => { playBtn.textContent = "▶"; });
-audio.addEventListener("ended", () => { playBtn.textContent = "▶"; });
+audio.addEventListener("play", () => { playBtn.textContent = "❚❚"; renderPlaylist(); });
+audio.addEventListener("pause", () => { playBtn.textContent = "▶"; renderPlaylist(); });
+audio.addEventListener("ended", () => {
+  playBtn.textContent = "▶";
+  if(playlist.length > 0) loadTrack((currentIndex + 1) % playlist.length);
+});
 
 audio.addEventListener("timeupdate", updateStatusTime);
 
-audio.addEventListener("loadedmetadata", () => { hasTrack = true; });
-audio.addEventListener("error", () => { hasTrack = false; });
-
 prevBtn.addEventListener("click", () => {
-  if(hasTrack) audio.currentTime = Math.max(0, audio.currentTime - 10);
+  if(playlist.length === 0) return;
+  loadTrack((currentIndex - 1 + playlist.length) % playlist.length);
 });
 
 nextBtn.addEventListener("click", () => {
-  if(hasTrack) audio.currentTime = Math.min(audio.duration || 0, audio.currentTime + 10);
+  if(playlist.length === 0) return;
+  loadTrack((currentIndex + 1) % playlist.length);
 });
 
 volBtn.addEventListener("click", () => {
