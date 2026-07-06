@@ -176,10 +176,11 @@ body{
 
 .menuList{
   margin-top:auto;
+  max-height:100px;
   width:100%;
   background:#4c5b45;
   border-radius:10px;
-  overflow:hidden;
+  overflow-y:auto;
   font-size:24px;
 }
 
@@ -339,6 +340,10 @@ body{
   cursor:pointer;
 }
 
+  .menuList::-webkit-scrollbar{
+    display:none;
+}
+
 /* ---- FOOTER NAV (message/gallery) ---- */
 
 .screenFooter{
@@ -489,10 +494,9 @@ body{
 
       <!-- MESSAGE PAGE -->
       <div class="page" id="messagePage">
-        <div class="fromBar"><span>from: gamers ganteng idaman</span><span>♥</span></div>
+        <div class="fromBar"><span>from: someone special</span><span>♥</span></div>
         <div class="messageBody">
           hey,<br>
-            kontol besar <br>
           just a little reminder... you're constantly on my mind.
           <br><br>
           i miss our talks,<br>
@@ -613,8 +617,7 @@ const emptyTracks= document.getElementById("emptyTracks");
 
 // daftar lagu: tiap item {name, url}
 // kalau kamu sudah punya file lagu tetap, bisa langsung isi array ini, contoh:
-// let playlist = [{ name:"Nama Lagu 1", url:"lagu1.mp3" }, { name:"Nama Lagu 2", url:"lagu2.mp3" }];
-let playlist = [];
+let playlist = [{ name:"Nama Lagu 1", url:"bruno.mp3" }];
 let currentIndex = -1;
 let muted = false;
 
@@ -711,7 +714,8 @@ volBtn.addEventListener("click", () => {
   audio.muted = muted;
   volBtn.style.opacity = muted ? .4 : 1;
 });
-
+renderPlaylist();
+showPage("home");
 </script>
 
 </body>
