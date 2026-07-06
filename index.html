@@ -18,7 +18,42 @@
  
 body{
   background:#1f2329;
-  background-image:radial-gradient(circle at 50% 0%, #2a2f38, #1f2329 60%);
+  background-image:radial-gradient(circle at 50% 0%, #2a2f38, #1f2329 60%);<div class="page" id="messagePage">
+
+    <div class="fromBar">
+        <span>from: someone special</span>
+        <span>♥</span>
+    </div>
+
+    <div class="messageBody">
+        hey,<br>
+        just a little reminder... you're constantly on my mind.
+        <br><br>
+        i miss our talks,<br>
+        our laughs,<br>
+        our everything.
+        <br><br>
+        can't wait to see you again.
+        <br><br>
+        - always, me ♥
+    </div>
+
+    <!-- AUTO SLIDE -->
+    <div class="autoGallery">
+        <img src="1.jpg.jpeg" class="slide active">
+        <img src="2.jpg.jpeg" class="slide">
+        <img src="3.jpg.jpeg" class="slide">
+        <img src="4.jpg.jpeg" class="slide">
+        <img src="5.jpg.jpeg" class="slide">
+    </div>
+
+    <div class="screenFooter">
+        <span onclick="showPage('home')">◀ BACK</span>
+        <span>♥</span>
+        <span onclick="showPage('home')">HOME ▶</span>
+    </div>
+
+</div>m
   display:flex;
   flex-direction:column;
   justify-content:center;
@@ -601,25 +636,41 @@ body{
  
       <!-- MESSAGE PAGE -->
       <div class="page" id="messagePage">
-        <div class="fromBar"><span>from: someone special</span><span>♥</span></div>
-        <div class="messageBody">
-          hey,<br>
-          just a little reminder... you're constantly on my mind.
-          <br><br>
-          i miss our talks,<br>
-          our laughs,<br>
-          our everything.
-          <br><br>
-          can't wait to see you again.
-          <br><br>
-          - always, me ♥
-        </div>
-        <div class="screenFooter">
-          <span onclick="showPage('home')">◀ BACK</span>
-          <span>♥</span>
-          <span onclick="showPage('home')">HOME ▶</span>
-        </div>
-      </div>
+
+    <div class="fromBar">
+        <span>from: someone special</span>
+        <span>♥</span>
+    </div>
+
+    <div class="messageBody">
+        hey,<br>
+        just a little reminder... you're constantly on my mind.
+        <br><br>
+        i miss our talks,<br>
+        our laughs,<br>
+        our everything.
+        <br><br>
+        can't wait to see you again.
+        <br><br>
+        - always, me ♥
+    </div>
+
+    <!-- AUTO SLIDE -->
+    <div class="autoGallery">
+        <img src="1.jpg.jpeg" class="slide active">
+        <img src="2.jpg.jpeg" class="slide">
+        <img src="3.jpg.jpeg" class="slide">
+        <img src="4.jpg.jpeg" class="slide">
+        <img src="5.jpg.jpeg" class="slide">
+    </div>
+
+    <div class="screenFooter">
+        <span onclick="showPage('home')">◀ BACK</span>
+        <span>♥</span>
+        <span onclick="showPage('home')">HOME ▶</span>
+    </div>
+
+</div>
  
       <!-- GALLERY PAGE -->
       <div class="page" id="galleryPage">
