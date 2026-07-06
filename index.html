@@ -4,18 +4,18 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Miss You MP3</title>
-
+ 
 <link href="https://fonts.googleapis.com/css2?family=VT323&family=Caveat:wght@500&display=swap" rel="stylesheet">
-
+ 
 <style>
-
+ 
 *{
   margin:0;
   padding:0;
   box-sizing:border-box;
   font-family:'VT323',monospace;
 }
-
+ 
 body{
   background:#1f2329;
   background-image:radial-gradient(circle at 50% 0%, #2a2f38, #1f2329 60%);
@@ -27,13 +27,13 @@ body{
   padding:40px 20px;
   gap:14px;
 }
-
+ 
 .note{
   font-family:'Caveat',cursive;
   color:#8a8f96;
   font-size:22px;
 }
-
+ 
 .player{
   width:360px;
   background:linear-gradient(160deg,#f3efe6,#e6dfd2);
@@ -45,7 +45,7 @@ body{
     inset 0 2px 6px rgba(255,255,255,.9);
   position:relative;
 }
-
+ 
 .camDot{
   width:60px;
   height:8px;
@@ -54,7 +54,7 @@ body{
   margin:0 auto 10px;
   opacity:.85;
 }
-
+ 
 .title{
   text-align:center;
   font-size:30px;
@@ -62,20 +62,20 @@ body{
   color:#2c2c2c;
   margin-bottom:14px;
 }
-
+ 
 .title .heartIcon{
   color:#7a1f2b;
 }
-
+ 
 /* ---------- SCREEN ---------- */
-
+ 
 .screen{
   background:#3a3a3a;
   border-radius:20px;
   padding:8px;
   box-shadow:inset 0 0 0 1px rgba(0,0,0,.3);
 }
-
+ 
 .lcd{
   background:linear-gradient(160deg,#dbe4cb,#c9d3b8);
   border-radius:13px;
@@ -85,7 +85,7 @@ body{
   overflow:hidden;
   color:#2f3a26;
 }
-
+ 
 .status{
   display:flex;
   justify-content:space-between;
@@ -94,13 +94,13 @@ body{
   color:#33402c;
   margin-bottom:6px;
 }
-
+ 
 .status .right{
   display:flex;
   align-items:center;
   gap:6px;
 }
-
+ 
 .battery{
   width:26px;
   height:14px;
@@ -127,29 +127,29 @@ body{
   background:#33402c;
   border-radius:1px;
 }
-
+ 
 /* PAGES */
-
+ 
 .page{ display:none; height:100%; }
 .page.active{ display:flex; flex-direction:column; height:calc(100% - 26px); }
-
+ 
 /* ---- HOME PAGE ---- */
-
+ 
 #homePage{ align-items:center; text-align:center; }
-
+ 
 .heartWrap{
   position:relative;
   margin-top:6px;
   height:100px;
 }
-
+ 
 .bigHeart{
   font-size:80px;
   line-height:1;
   color:#33402c;
   filter:drop-shadow(1px 1px 0 rgba(0,0,0,.15));
 }
-
+ 
 .deco{
   position:absolute;
   font-size:22px;
@@ -159,21 +159,21 @@ body{
 .deco.d1{ top:-4px; left:14px; }
 .deco.d2{ top:36px; right:10px; }
 .deco.d3{ bottom:-6px; left:26px; }
-
+ 
 .homeTitle{
   font-size:34px;
   letter-spacing:2px;
   margin:6px 0 4px;
   color:#26311f;
 }
-
+ 
 .homeSub{
   font-size:19px;
   line-height:22px;
   color:#4a5a3f;
   max-width:220px;
 }
-
+ 
 .menuList{
   margin-top:auto;
   max-height:100px;
@@ -183,7 +183,7 @@ body{
   overflow-y:auto;
   font-size:24px;
 }
-
+ 
 .menuList .item{
   padding:9px 14px;
   color:#e9ecdf;
@@ -193,16 +193,16 @@ body{
   align-items:center;
   gap:8px;
 }
-
+ 
 .menuList .item.active{
   background:#2c3728;
   color:#fff;
 }
-
+ 
 /* ---- MESSAGE PAGE ---- */
-
+ 
 #messagePage{ height:100%; }
-
+ 
 .fromBar{
   background:#e4ead6;
   border-radius:8px;
@@ -214,7 +214,7 @@ body{
   margin-bottom:8px;
   color:#33402c;
 }
-
+ 
 .messageBody{
   font-size:19px;
   line-height:24px;
@@ -223,14 +223,14 @@ body{
   padding-right:6px;
   color:#2c3620;
 }
-
+ 
 .messageBody::-webkit-scrollbar{ width:5px; }
 .messageBody::-webkit-scrollbar-thumb{ background:#7d8a70; border-radius:3px; }
-
+ 
 /* ---- GALLERY PAGE ---- */
-
+ 
 #galleryPage{ height:100%; }
-
+ 
 .galleryLabel{
   background:#e4ead6;
   border-radius:8px;
@@ -242,13 +242,13 @@ body{
   margin-bottom:8px;
   color:#33402c;
 }
-
+ 
 .gallery{
   display:grid;
   grid-template-columns:repeat(3,1fr);
   gap:6px;
 }
-
+ 
 .gallery img{
   width:100%;
   height:64px;
@@ -257,7 +257,7 @@ body{
   border:2px solid #3a4531;
   display:block;
 }
-
+ 
 .pageNav{
   margin-top:auto;
   text-align:center;
@@ -265,11 +265,11 @@ body{
   color:#33402c;
   padding-top:6px;
 }
-
+ 
   /* ===========================
    IMAGE POPUP
 =========================== */
-
+ 
 .imagePopup{
     position:fixed;
     inset:0;
@@ -281,21 +281,47 @@ body{
     visibility:hidden;
     transition:.25s;
     z-index:9999;
+    overflow:hidden;
 }
-
+ 
 .imagePopup.show{
     opacity:1;
     visibility:visible;
 }
-
-.imagePopup img{
-    max-width:90%;
-    max-height:90%;
+ 
+.popupImageWrap{
+    position:relative;
+    width:90%;
+    height:90%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    overflow:hidden;
+    touch-action:pan-y;
+}
+ 
+.popupImageWrap img{
+    max-width:100%;
+    max-height:100%;
     border-radius:15px;
     box-shadow:0 20px 40px rgba(0,0,0,.5);
-    animation:zoom .25s;
+    user-select:none;
+    -webkit-user-drag:none;
+    transition:transform .3s ease, opacity .3s ease;
 }
-
+ 
+.imagePopup img.slide-in-right{ animation:slideInRight .3s ease; }
+.imagePopup img.slide-in-left{ animation:slideInLeft .3s ease; }
+ 
+@keyframes slideInRight{
+    from{ transform:translateX(60px); opacity:0; }
+    to{ transform:translateX(0); opacity:1; }
+}
+@keyframes slideInLeft{
+    from{ transform:translateX(-60px); opacity:0; }
+    to{ transform:translateX(0); opacity:1; }
+}
+ 
 @keyframes zoom{
     from{
         transform:scale(.8);
@@ -306,7 +332,7 @@ body{
         opacity:1;
     }
 }
-
+ 
 .closePopup{
     position:absolute;
     top:25px;
@@ -315,12 +341,42 @@ body{
     font-size:40px;
     cursor:pointer;
     user-select:none;
+    z-index:2;
 }
-
+ 
+.popupNav{
+    position:absolute;
+    top:50%;
+    transform:translateY(-50%);
+    color:white;
+    font-size:38px;
+    cursor:pointer;
+    user-select:none;
+    z-index:2;
+    padding:10px 16px;
+    opacity:.75;
+    transition:opacity .2s;
+}
+.popupNav:hover{ opacity:1; }
+.popupPrev{ left:8px; }
+.popupNext{ right:8px; }
+ 
+.popupCounter{
+    position:absolute;
+    bottom:20px;
+    left:50%;
+    transform:translateX(-50%);
+    color:white;
+    font-size:18px;
+    letter-spacing:2px;
+    opacity:.8;
+    z-index:2;
+}
+ 
 /* ---- PLAYLIST PAGE ---- */
-
+ 
 #playlistPage{ height:100%; }
-
+ 
 .playlistLabel{
   background:#e4ead6;
   border-radius:8px;
@@ -332,16 +388,16 @@ body{
   margin-bottom:8px;
   color:#33402c;
 }
-
+ 
 .trackList{
   flex:1;
   overflow-y:auto;
   padding-right:4px;
 }
-
+ 
 .trackList::-webkit-scrollbar{ width:5px; }
 .trackList::-webkit-scrollbar-thumb{ background:#7d8a70; border-radius:3px; }
-
+ 
 .track{
   display:flex;
   align-items:center;
@@ -352,26 +408,26 @@ body{
   color:#2c3620;
   cursor:pointer;
 }
-
+ 
 .track .num{
   width:18px;
   opacity:.7;
   flex-shrink:0;
 }
-
+ 
 .track .name{
   flex:1;
   white-space:nowrap;
   overflow:hidden;
   text-overflow:ellipsis;
 }
-
+ 
 .track.playing{
   background:#4c5b45;
   color:#fff;
 }
 .track.playing .num{ opacity:1; }
-
+ 
 .emptyTracks{
   text-align:center;
   color:#5a6650;
@@ -379,7 +435,7 @@ body{
   margin-top:30px;
   line-height:24px;
 }
-
+ 
 .addTrackBtn{
   margin-top:6px;
   text-align:center;
@@ -390,13 +446,13 @@ body{
   font-size:19px;
   cursor:pointer;
 }
-
+ 
   .menuList::-webkit-scrollbar{
     display:none;
 }
-
+ 
 /* ---- FOOTER NAV (message/gallery) ---- */
-
+ 
 .screenFooter{
   margin-top:10px;
   display:flex;
@@ -406,11 +462,11 @@ body{
   color:#33402c;
   padding:0 2px;
 }
-
+ 
 .screenFooter span{ cursor:pointer; }
-
+ 
 /* ---------- BELOW SCREEN ---------- */
-
+ 
 .deviceLabel{
   text-align:center;
   margin-top:16px;
@@ -418,7 +474,7 @@ body{
   letter-spacing:1px;
   color:#2c2c2c;
 }
-
+ 
 .deviceCaption{
   text-align:center;
   font-size:15px;
@@ -426,9 +482,9 @@ body{
   color:#8a8578;
   margin-bottom:18px;
 }
-
+ 
 /* ---------- CLICK WHEEL ---------- */
-
+ 
 .wheel{
   width:210px;
   height:210px;
@@ -441,7 +497,7 @@ body{
     inset 0 -4px 10px rgba(0,0,0,.12),
     0 6px 14px rgba(0,0,0,.25);
 }
-
+ 
 .menuBtn{
   position:absolute;
   top:16px;
@@ -453,7 +509,7 @@ body{
   cursor:pointer;
   user-select:none;
 }
-
+ 
 .volBtn{
   position:absolute;
   bottom:16px;
@@ -465,7 +521,7 @@ body{
   cursor:pointer;
   user-select:none;
 }
-
+ 
 .prevBtn, .nextBtn{
   position:absolute;
   top:50%;
@@ -477,7 +533,7 @@ body{
 }
 .prevBtn{ left:20px; }
 .nextBtn{ right:20px; }
-
+ 
 .playBtn{
   position:absolute;
   left:50%;
@@ -496,7 +552,7 @@ body{
   box-shadow:0 3px 8px rgba(0,0,0,.2), inset 0 0 0 1px rgba(0,0,0,.05);
   user-select:none;
 }
-
+ 
 .footer{
   text-align:center;
   margin-top:16px;
@@ -504,27 +560,27 @@ body{
   letter-spacing:1px;
   color:#6b6b6b;
 }
-
+ 
 </style>
 </head>
 <body>
-
+ 
 <div class="note">always thinking of you ♡</div>
-
+ 
 <div class="player">
-
+ 
   <div class="camDot"></div>
-
+ 
   <div class="title">MISS U <span class="heartIcon">♥</span></div>
-
+ 
   <div class="screen">
     <div class="lcd">
-
+ 
       <div class="status">
         <span id="statusLeft">♪ 00:00</span>
         <span class="right"><span class="battery"><i style="width:16px"></i></span></span>
       </div>
-
+ 
       <!-- HOME PAGE -->
       <div class="page active" id="homePage">
         <div class="heartWrap">
@@ -535,14 +591,14 @@ body{
         </div>
         <div class="homeTitle">I MISS YOU</div>
         <div class="homeSub">some people just<br>stay in your heart.</div>
-
+ 
         <div class="menuList">
           <div class="item active" data-target="message" onclick="showPage('message')">▶ MESSAGE</div>
           <div class="item" data-target="gallery" onclick="showPage('gallery')">GALERI</div>
           <div class="item" data-target="playlist" onclick="showPage('playlist')">PLAYLIST</div>
         </div>
       </div>
-
+ 
       <!-- MESSAGE PAGE -->
       <div class="page" id="messagePage">
         <div class="fromBar"><span>from: someone special</span><span>♥</span></div>
@@ -564,7 +620,7 @@ body{
           <span onclick="showPage('home')">HOME ▶</span>
         </div>
       </div>
-
+ 
       <!-- GALLERY PAGE -->
       <div class="page" id="galleryPage">
         <div class="galleryLabel"><span>memories</span><span>♥</span></div>
@@ -586,7 +642,7 @@ body{
           <span onclick="showPage('home')">HOME ▶</span>
         </div>
       </div>
-
+ 
       <!-- PLAYLIST PAGE -->
       <div class="page" id="playlistPage">
         <div class="playlistLabel"><span>daftar lagu</span><span>♥</span></div>
@@ -600,13 +656,13 @@ body{
           <span onclick="showPage('home')">HOME ▶</span>
         </div>
       </div>
-
+ 
     </div>
   </div>
-
+ 
   <div class="deviceLabel">MP3 PLAYER</div>
   <div class="deviceCaption">DIGITAL LOVE STORAGE</div>
-
+ 
   <div class="wheel">
     <div class="menuBtn" onclick="showPage('home')">MENU</div>
     <div class="prevBtn" id="prevBtn">⏮</div>
@@ -614,31 +670,37 @@ body{
     <div class="nextBtn" id="nextBtn">⏭</div>
     <div class="volBtn" id="volBtn">VOL</div>
   </div>
-
+ 
   <input type="file" id="fileInput" accept="audio/*" multiple style="display:none">
-
+ 
 </div>
-
+ 
 <div class="note">press play to feel ♡</div>
-
+ 
   <div class="imagePopup" id="imagePopup">
-
+ 
     <span class="closePopup">&times;</span>
-
-    <img id="popupImage">
-
+    <span class="popupNav popupPrev" id="popupPrev">&#10094;</span>
+    <span class="popupNav popupNext" id="popupNext">&#10095;</span>
+ 
+    <div class="popupImageWrap" id="popupImageWrap">
+      <img id="popupImage">
+    </div>
+ 
+    <div class="popupCounter" id="popupCounter"></div>
+ 
 </div>
-
+ 
 <script>
-
+ 
 /* ---------- NAVIGATION ---------- */
-
+ 
 function showPage(page){
   document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
   document.querySelectorAll(".menuList .item").forEach(i=>i.classList.remove("active"));
-
+ 
   const statusLeft = document.getElementById("statusLeft");
-
+ 
   if(page==="home"){
     document.getElementById("homePage").classList.add("active");
     updateStatusTime();
@@ -659,12 +721,12 @@ function showPage(page){
     statusLeft.textContent = "♪ PLAYLIST";
   }
 }
-
+ 
 /* ---------- AUDIO PLAYER + PLAYLIST ---------- */
-
+ 
 const audio = new Audio();
 audio.preload = "metadata";
-
+ 
 const playBtn    = document.getElementById("playBtn");
 const prevBtn    = document.getElementById("prevBtn");
 const nextBtn    = document.getElementById("nextBtn");
@@ -673,27 +735,27 @@ const fileInput  = document.getElementById("fileInput");
 const statusLeft = document.getElementById("statusLeft");
 const trackList  = document.getElementById("trackList");
 const emptyTracks= document.getElementById("emptyTracks");
-
+ 
 // daftar lagu: tiap item {name, url}
 // kalau kamu sudah punya file lagu tetap, bisa langsung isi array ini, contoh:
 let playlist = [{ name:"Suspended in time", url:"Suspended in time.mp3" },{ name:"Plain White T's - Hey There Delilah", url:"Plain White T's - Hey There Delilah Lyrics.mp3" }];
 let currentIndex = -1;
 let muted = false;
-
+ 
 function formatTime(sec){
   if(isNaN(sec)) return "00:00";
   const m = Math.floor(sec/60).toString().padStart(2,"0");
   const s = Math.floor(sec%60).toString().padStart(2,"0");
   return m+":"+s;
 }
-
+ 
 function updateStatusTime(){
   // hanya tampilkan waktu berjalan saat berada di halaman home
   if(document.getElementById("homePage").classList.contains("active")){
     statusLeft.textContent = "♪ " + formatTime(audio.currentTime || 0);
   }
 }
-
+ 
 function renderPlaylist(){
   trackList.innerHTML = "";
   if(playlist.length === 0){
@@ -711,7 +773,7 @@ function renderPlaylist(){
     trackList.appendChild(row);
   });
 }
-
+ 
 function loadTrack(i, autoplay = true){
   if(i < 0 || i >= playlist.length) return;
   currentIndex = i;
@@ -719,7 +781,7 @@ function loadTrack(i, autoplay = true){
   if(autoplay) audio.play().catch(()=>{});
   renderPlaylist();
 }
-
+ 
 playBtn.addEventListener("click", () => {
   if(playlist.length === 0){
     fileInput.click();
@@ -735,7 +797,7 @@ playBtn.addEventListener("click", () => {
     audio.pause();
   }
 });
-
+ 
 fileInput.addEventListener("change", (e) => {
   const files = Array.from(e.target.files);
   if(files.length === 0) return;
@@ -748,26 +810,26 @@ fileInput.addEventListener("change", (e) => {
   if(currentIndex === -1) loadTrack(startIndex);
   fileInput.value = "";
 });
-
+ 
 audio.addEventListener("play", () => { playBtn.textContent = "❚❚"; renderPlaylist(); });
 audio.addEventListener("pause", () => { playBtn.textContent = "▶"; renderPlaylist(); });
 audio.addEventListener("ended", () => {
   playBtn.textContent = "▶";
   if(playlist.length > 0) loadTrack((currentIndex + 1) % playlist.length);
 });
-
+ 
 audio.addEventListener("timeupdate", updateStatusTime);
-
+ 
 prevBtn.addEventListener("click", () => {
   if(playlist.length === 0) return;
   loadTrack((currentIndex - 1 + playlist.length) % playlist.length);
 });
-
+ 
 nextBtn.addEventListener("click", () => {
   if(playlist.length === 0) return;
   loadTrack((currentIndex + 1) % playlist.length);
 });
-
+ 
 volBtn.addEventListener("click", () => {
   muted = !muted;
   audio.muted = muted;
@@ -775,36 +837,111 @@ volBtn.addEventListener("click", () => {
 });
 renderPlaylist();
 showPage("home");
-  const popup=document.getElementById("imagePopup");
-const popupImage=document.getElementById("popupImage");
-
-document.querySelectorAll(".galleryImage").forEach(img=>{
-
-    img.addEventListener("click",()=>{
-
-        popup.classList.add("show");
-
-        popupImage.src=img.src;
-
-    });
-
+ 
+/* ---------- IMAGE POPUP + SLIDE GALLERY ---------- */
+ 
+const popup       = document.getElementById("imagePopup");
+const popupImage  = document.getElementById("popupImage");
+const popupWrap   = document.getElementById("popupImageWrap");
+const popupPrev   = document.getElementById("popupPrev");
+const popupNext   = document.getElementById("popupNext");
+const popupCounter= document.getElementById("popupCounter");
+ 
+const galleryImages = Array.from(document.querySelectorAll(".galleryImage"));
+let currentImgIndex = 0;
+ 
+function openPopup(index){
+  currentImgIndex = index;
+  renderPopupImage(null);
+  popup.classList.add("show");
+}
+ 
+function renderPopupImage(direction){
+  // direction: "left" (next, geser dari kanan), "right" (prev, geser dari kiri), or null (no animation)
+  popupImage.src = galleryImages[currentImgIndex].src;
+  popupCounter.textContent = (currentImgIndex + 1) + " / " + galleryImages.length;
+ 
+  popupImage.classList.remove("slide-in-left", "slide-in-right");
+  if(direction === "left"){
+    void popupImage.offsetWidth; // restart animasi
+    popupImage.classList.add("slide-in-right");
+  } else if(direction === "right"){
+    void popupImage.offsetWidth;
+    popupImage.classList.add("slide-in-left");
+  }
+}
+ 
+function showNextImage(){
+  currentImgIndex = (currentImgIndex + 1) % galleryImages.length;
+  renderPopupImage("left");
+}
+ 
+function showPrevImage(){
+  currentImgIndex = (currentImgIndex - 1 + galleryImages.length) % galleryImages.length;
+  renderPopupImage("right");
+}
+ 
+galleryImages.forEach((img, i) => {
+  img.addEventListener("click", () => openPopup(i));
 });
-
-document.querySelector(".closePopup").onclick=function(){
-
+ 
+popupNext.addEventListener("click", (e) => { e.stopPropagation(); showNextImage(); });
+popupPrev.addEventListener("click", (e) => { e.stopPropagation(); showPrevImage(); });
+ 
+document.querySelector(".closePopup").onclick = function(){
+  popup.classList.remove("show");
+};
+ 
+popup.onclick = function(e){
+  if(e.target === popup){
     popup.classList.remove("show");
-
-}
-
-popup.onclick=function(e){
-
-    if(e.target===popup){
-
-        popup.classList.remove("show");
-
-    }
-
-}
+  }
+};
+ 
+// keyboard arrow support (desktop)
+document.addEventListener("keydown", (e) => {
+  if(!popup.classList.contains("show")) return;
+  if(e.key === "ArrowRight") showNextImage();
+  if(e.key === "ArrowLeft") showPrevImage();
+  if(e.key === "Escape") popup.classList.remove("show");
+});
+ 
+// swipe gesture support (mobile/touch + mouse drag)
+let touchStartX = 0;
+let touchStartY = 0;
+let touchDragging = false;
+ 
+popupWrap.addEventListener("touchstart", (e) => {
+  touchStartX = e.touches[0].clientX;
+  touchStartY = e.touches[0].clientY;
+  touchDragging = true;
+}, { passive:true });
+ 
+popupWrap.addEventListener("touchend", (e) => {
+  if(!touchDragging) return;
+  touchDragging = false;
+  const dx = e.changedTouches[0].clientX - touchStartX;
+  const dy = e.changedTouches[0].clientY - touchStartY;
+  if(Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)){
+    if(dx < 0) showNextImage(); else showPrevImage();
+  }
+}, { passive:true });
+ 
+// dukungan drag mouse di desktop
+let mouseDownX = null;
+popupWrap.addEventListener("mousedown", (e) => {
+  mouseDownX = e.clientX;
+});
+popupWrap.addEventListener("mouseup", (e) => {
+  if(mouseDownX === null) return;
+  const dx = e.clientX - mouseDownX;
+  mouseDownX = null;
+  if(Math.abs(dx) > 40){
+    if(dx < 0) showNextImage(); else showPrevImage();
+  }
+});
+ 
 </script>
 </body>
 </html>
+ 
